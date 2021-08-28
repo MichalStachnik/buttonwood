@@ -13,10 +13,10 @@ const Spinner = () => {
 
         .spinner span {
           display: inline-block;
-          height: 30px;
+          height: 3px;
           width: 0;
           border-radius: 50%;
-          border: 2px solid #df5555;
+          border: 2px solid rgb(230, 100, 101);
           animation: spinning 0.6s linear infinite;
           transform-origin: center;
         }
