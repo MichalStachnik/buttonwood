@@ -1,13 +1,10 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import { getTokenInfo } from 'erc20-token-list';
-import { Contract, getDefaultProvider, providers, utils } from 'ethers';
+import { providers, utils } from 'ethers';
 
 import Head from 'next/head';
 
-import DropdownToken from '../components/DropdownToken/DropdownToken';
 import TokenRow from '../components/TokenRow/TokenRow';
-import Spinner from '../components/Loader/Loader';
 import styles from '../styles/index.module.css';
 
 const ERC20TokenList = ['USDC', 'UNI', 'WBTC'];
@@ -20,18 +17,12 @@ const initWeb3Provider = (): providers.Web3Provider =>
 const Home: NextPage = () => {
   const [displayInfo, setDisplayInfo] = useState('');
 
-  const getAccount = async () => {
-    console.log('getting accnt...');
-    console.log((window as any).ethereum);
-    console.log(typeof window.ethereum);
-
-    const accounts = await window.ethereum.request({
+  const getAccount = async (): Promise<string> => {
+    const accounts = await (window as any).ethereum.request({
       method: 'eth_requestAccounts',
     });
 
-    console.log('accounts', accounts);
     const [account] = accounts;
-    setDisplayInfo(account);
     return account;
   };
 
@@ -42,13 +33,19 @@ const Home: NextPage = () => {
 
     const balance = await provider.getBalance(address);
 
-    console.log('the balance we got', balance);
-
     const formattedBalance = utils.formatEther(balance);
 
-    console.log('formattedBalance', formattedBalance);
-    setDisplayInfo(formattedBalance);
     return formattedBalance;
+  };
+
+  const showWalletAddress = async () => {
+    const address = await getAccount();
+    setDisplayInfo(address);
+  };
+
+  const showETHBalance = async () => {
+    const balance = await getWalletBalance();
+    setDisplayInfo(balance);
   };
 
   return (
@@ -69,26 +66,29 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <main className={styles.main}>
-        <div className={styles.dashboard}>
-          <div className={styles.result}>
-            <span className={styles.display}>
-              <p>{displayInfo}</p>
-            </span>
-            <span className={styles.display}></span>
-            <span className={styles.display}></span>
-          </div>
-          <div className={styles.controls}>
-            <div className={styles.buttonContainer}>
-              <button onClick={getAccount}>wallet address</button>
-              <button onClick={getWalletBalance}>ETH balance</button>
+      {typeof window !== 'undefined' &&
+        (window as any).ethereum !== 'undefined' && (
+          <main className={styles.main}>
+            <div className={styles.dashboard}>
+              <div className={styles.result}>
+                <span className={styles.display}>
+                  <p>{displayInfo}</p>
+                </span>
+                <span className={styles.display}></span>
+                <span className={styles.display}></span>
+              </div>
+              <div className={styles.controls}>
+                <div className={styles.buttonContainer}>
+                  <button onClick={showWalletAddress}>wallet address</button>
+                  <button onClick={showETHBalance}>ETH balance</button>
+                </div>
+                {ERC20TokenList.map(token => (
+                  <TokenRow key={token} token={token} />
+                ))}
+              </div>
             </div>
-            {ERC20TokenList.map(token => (
-              <TokenRow key={token} token={token} />
-            ))}
-          </div>
-        </div>
-      </main>
+          </main>
+        )}
     </div>
   );
 };
