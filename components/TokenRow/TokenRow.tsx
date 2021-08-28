@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { BigNumber, Contract, getDefaultProvider, utils } from 'ethers';
+import { Contract, getDefaultProvider, utils } from 'ethers';
 import { getTokenInfo } from 'erc20-token-list';
 import Loader from '../Loader/Loader';
 
@@ -20,7 +20,6 @@ const TokenRow = ({ token }: Props) => {
 
     const balance = await erc20Contract.balanceOf(address);
 
-    console.log('balance', balance);
     setTokenBalance(parseFloat(utils.formatEther(balance)).toFixed(2));
     setIsLoading(false);
   };
@@ -35,7 +34,6 @@ const TokenRow = ({ token }: Props) => {
     getERC20WalletBalance(tokenInfo.address);
   }, [token]);
 
-  console.log('renda');
   return (
     <div className="token-row">
       <div className="image">

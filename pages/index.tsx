@@ -17,24 +17,31 @@ const Home: NextPage = () => {
   const [displayInfo, setDisplayInfo] = useState('');
 
   const getAccount = async (): Promise<string> => {
-    const accounts = await (window as any).ethereum.request({
-      method: 'eth_requestAccounts',
-    });
+    try {
+      const accounts = await (window as any).ethereum.request({
+        method: 'eth_requestAccounts',
+      });
 
-    const [account] = accounts;
-    return account;
+      const [account] = accounts;
+      return account;
+    } catch (error) {
+      console.error('error', error);
+      return '';
+    }
   };
 
   const getWalletBalance = async (): Promise<string> => {
-    const address = await getAccount();
+    try {
+      const address = await getAccount();
+      const provider = initWeb3Provider();
+      const balance = await provider.getBalance(address);
+      const formattedBalance = utils.formatEther(balance);
 
-    const provider = initWeb3Provider();
-
-    const balance = await provider.getBalance(address);
-
-    const formattedBalance = utils.formatEther(balance);
-
-    return formattedBalance;
+      return formattedBalance;
+    } catch (error) {
+      console.error('error', error);
+      return '';
+    }
   };
 
   const showWalletAddress = async () => {

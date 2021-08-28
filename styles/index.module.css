@@ -36,9 +36,7 @@
     rgb(230, 100, 101),
     rgb(145, 152, 229)
   );
-
   border-radius: 1.5rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
