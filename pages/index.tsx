@@ -72,27 +72,29 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      {typeof window !== 'undefined' &&
-        (window as any).ethereum !== 'undefined' && (
-          <main className={styles.main}>
-            <div className={styles.dashboard}>
-              <div className={styles.result}>
-                <span className={styles.display}>
-                  <p>{displayInfo}</p>
-                </span>
-              </div>
-              <div className={styles.controls}>
-                <div className={styles.buttonContainer}>
-                  <button onClick={showWalletAddress}>wallet address</button>
-                  <button onClick={showETHBalance}>ETH balance</button>
+      <main className={styles.main}>
+        <div className={styles.dashboard}>
+          {typeof window !== 'undefined' &&
+            (window as any).ethereum !== 'undefined' && (
+              <>
+                <div className={styles.result}>
+                  <span className={styles.display}>
+                    <p>{displayInfo}</p>
+                  </span>
                 </div>
-                {ERC20TokenList.map(token => (
-                  <TokenRow key={token} token={token} />
-                ))}
-              </div>
-            </div>
-          </main>
-        )}
+                <div className={styles.controls}>
+                  <div className={styles.buttonContainer}>
+                    <button onClick={showWalletAddress}>wallet address</button>
+                    <button onClick={showETHBalance}>ETH balance</button>
+                  </div>
+                  {ERC20TokenList.map(token => (
+                    <TokenRow key={token} token={token} />
+                  ))}
+                </div>
+              </>
+            )}
+        </div>
+      </main>
     </div>
   );
 };
