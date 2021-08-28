@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
 import { providers, utils } from 'ethers';
-
 import Head from 'next/head';
 
 import TokenRow from '../components/TokenRow/TokenRow';
@@ -74,8 +73,6 @@ const Home: NextPage = () => {
                 <span className={styles.display}>
                   <p>{displayInfo}</p>
                 </span>
-                <span className={styles.display}></span>
-                <span className={styles.display}></span>
               </div>
               <div className={styles.controls}>
                 <div className={styles.buttonContainer}>
