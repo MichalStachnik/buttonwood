@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Contract, getDefaultProvider, utils } from 'ethers';
 import { getTokenInfo } from 'erc20-token-list';
-import Loader from '../Loader/Loader';
+import Spinner from '../Spinner/Spinner';
 
 type Props = {
   token: string;
@@ -58,7 +58,7 @@ const TokenRow = ({ token }: Props) => {
       <div className="token">{token}</div>
       <div className="balance">
         {isLoading ? (
-          <Loader />
+          <Spinner />
         ) : (
           <div>
             <p>{tokenBalance}</p>

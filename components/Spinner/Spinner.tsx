@@ -1,4 +1,4 @@
-const Loader = () => {
+const Spinner = () => {
   return (
     <div className="spinner">
       <span></span>
@@ -52,4 +52,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default Spinner;
