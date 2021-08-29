@@ -34,11 +34,22 @@ const TokenRow = ({ token }: Props) => {
     getERC20WalletBalance(tokenInfo.address);
   }, [token]);
 
+  const handleRefreshClick = () => {
+    setIsLoading(true);
+    const tokenInfo = getTokenInfo(token);
+
+    if (tokenInfo === undefined) {
+      throw new Error(`Can NOT find ERC20 contract address of ${token}`);
+    }
+
+    getERC20WalletBalance(tokenInfo.address);
+  };
+
   return (
     <div className="token-row">
       <div className="image">
         <Image
-          src={`${token.toLowerCase()}-logo.svg`}
+          src={`/${token.toLowerCase()}-logo.svg`}
           alt={token}
           width={32}
           height={32}
@@ -46,7 +57,14 @@ const TokenRow = ({ token }: Props) => {
       </div>
       <div className="token">{token}</div>
       <div className="balance">
-        {isLoading ? <Loader /> : <p>{tokenBalance}</p>}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div>
+            <p>{tokenBalance}</p>
+            <span onClick={handleRefreshClick}>refresh</span>
+          </div>
+        )}
       </div>
       <style jsx>{`
         .token-row {
