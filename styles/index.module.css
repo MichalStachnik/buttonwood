@@ -58,32 +58,6 @@
   padding: 1rem;
 }
 
-.buttonContainer {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 1.5rem;
-  width: 90%;
-}
-
-.buttonContainer button {
-  background: rgb(163, 141, 203);
-  color: white;
-  border: 1px solid rgb(163, 141, 203);
-  border-radius: 0.55rem;
-  padding: 0.5rem 1rem;
-  transition: 0.2s all ease-in-out;
-  text-transform: capitalize;
-  flex: 0.4;
-  font-family: 'Open Sans', sans-serif;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3);
-}
-
-.buttonContainer button:hover {
-  background: white;
-  color: rgb(145, 152, 229);
-  cursor: pointer;
-}
-
 .table {
   width: 90%;
   height: 70%;
