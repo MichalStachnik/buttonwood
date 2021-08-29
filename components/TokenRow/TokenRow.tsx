@@ -40,7 +40,7 @@ const TokenRow = ({ token }: Props) => {
   return (
     <div className="token-row">
       <div className="image">
-        <Image src={imgSrc} alt={token} width="32" height="32" />
+        <Image src={imgSrc} alt={token} width={32} height={32} />
       </div>
       <div className="token">{token}</div>
       <div className="balance">
