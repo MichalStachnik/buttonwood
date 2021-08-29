@@ -1,72 +1,13 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
-import { providers, utils } from 'ethers';
 import Head from 'next/head';
 
+import UserInfoModule from '../components/UserInfoModule/UserInfoModule';
 import TokenRow from '../components/TokenRow/TokenRow';
 import styles from '../styles/index.module.css';
 
 const ERC20TokenList = ['GRT', 'USDC', 'UNI', 'WBTC', 'ZIL'];
 
-const initWeb3Provider = (): providers.Web3Provider =>
-  new providers.Web3Provider((window as any).ethereum);
-
-// TODO: get keys for infura and alchemy
-
 const Home: NextPage = () => {
-  const [displayInfo, setDisplayInfo] = useState('');
-
-  const getAccount = async (): Promise<string> => {
-    if ((window as any).ethereum === undefined) {
-      setDisplayInfo('Please install MetaMask to view your account details');
-      return '';
-    }
-
-    try {
-      const accounts = await (window as any).ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-
-      const [account] = accounts;
-      return account;
-    } catch (error) {
-      console.error('error', error);
-      return '';
-    }
-  };
-
-  const getWalletBalance = async (): Promise<string> => {
-    if ((window as any).ethereum === undefined) {
-      setDisplayInfo('Please install MetaMask to view your account details');
-      return '';
-    }
-
-    try {
-      const address = await getAccount();
-      const provider = initWeb3Provider();
-      const balance = await provider.getBalance(address);
-      const formattedBalance = utils.formatEther(balance);
-
-      return formattedBalance;
-    } catch (error) {
-      console.error('error !', error);
-      setDisplayInfo('Please install MetaMask to view your account details');
-      return '';
-    }
-  };
-
-  const showWalletAddress = async () => {
-    const address = await getAccount();
-
-    if (address) setDisplayInfo(address);
-  };
-
-  const showETHBalance = async () => {
-    const balance = await getWalletBalance();
-
-    if (balance) setDisplayInfo(balance);
-  };
-
   return (
     <div className={styles.container}>
       <Head>
@@ -90,16 +31,8 @@ const Home: NextPage = () => {
           {typeof window !== 'undefined' &&
           (window as any).ethereum !== 'undefined' ? (
             <>
-              <div className={styles.result}>
-                <span className={styles.display}>
-                  <p>{displayInfo}</p>
-                </span>
-              </div>
-              <div className={styles.controls}>
-                <div className={styles.buttonContainer}>
-                  <button onClick={showWalletAddress}>wallet address</button>
-                  <button onClick={showETHBalance}>ETH balance</button>
-                </div>
+              <UserInfoModule />
+              <div className={styles.table}>
                 {ERC20TokenList.map(token => (
                   <TokenRow key={token} token={token} />
                 ))}
