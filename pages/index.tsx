@@ -6,7 +6,7 @@ import Head from 'next/head';
 import TokenRow from '../components/TokenRow/TokenRow';
 import styles from '../styles/index.module.css';
 
-const ERC20TokenList = ['USDC', 'UNI', 'WBTC'];
+const ERC20TokenList = ['GRT', 'USDC', 'UNI', 'WBTC', 'ZIL'];
 
 const initWeb3Provider = (): providers.Web3Provider =>
   new providers.Web3Provider((window as any).ethereum);

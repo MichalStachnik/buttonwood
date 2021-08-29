@@ -80,13 +80,15 @@ const TokenRow = ({ token }: Props) => {
           width: 80%;
           margin: 0 auto;
           place-items: center;
+          min-height: 54px;
         }
 
         .token-row > .balance {
-          place-self: end;
+          place-self: center end;
         }
 
         .token-row > .balance > div {
+          place-self: end;
           display: flex;
           align-items: center;
         }
