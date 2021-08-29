@@ -34,13 +34,15 @@ const TokenRow = ({ token }: Props) => {
     getERC20WalletBalance(tokenInfo.address);
   }, [token]);
 
-  const imgSrc = `/${token}-logo.svg`;
-  console.log('the imgSrc we are trying...', imgSrc);
-
   return (
     <div className="token-row">
       <div className="image">
-        <Image src={imgSrc} alt={token} width={32} height={32} />
+        <Image
+          src={`${token.toLowerCase()}-logo.svg`}
+          alt={token}
+          width={32}
+          height={32}
+        />
       </div>
       <div className="token">{token}</div>
       <div className="balance">
