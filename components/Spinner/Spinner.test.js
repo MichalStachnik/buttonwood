@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 
-import Spinner from '../Spinner/Spinner';
+import Spinner from './Spinner';
 
-describe('App', () => {
+describe('Spinner', () => {
   it('renders the spinner', () => {
     const { container } = render(<Spinner />);
 
