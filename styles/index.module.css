@@ -15,6 +15,7 @@
   background: white;
   background: #333;
   font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 
 .main {
@@ -46,6 +47,8 @@
 .result {
   color: white;
   min-height: 54px;
+  font-size: 19px;
+  min-height: 64px;
 }
 
 .infoModule {
@@ -87,6 +90,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   border-radius: 1.5rem;
+  box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 767px) {
