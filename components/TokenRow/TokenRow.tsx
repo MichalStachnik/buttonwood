@@ -62,7 +62,14 @@ const TokenRow = ({ token }: Props) => {
         ) : (
           <div>
             <p>{tokenBalance}</p>
-            <span onClick={handleRefreshClick}>refresh</span>
+            <span onClick={handleRefreshClick}>
+              <Image
+                src="/refresh.png"
+                alt="refresh balance"
+                width={16}
+                height={16}
+              />
+            </span>
           </div>
         )}
       </div>
@@ -77,6 +84,16 @@ const TokenRow = ({ token }: Props) => {
 
         .token-row > .balance {
           place-self: end;
+        }
+
+        .token-row > .balance > div {
+          display: flex;
+          align-items: center;
+        }
+
+        .token-row > .balance span {
+          margin-left: 2rem;
+          cursor: pointer;
         }
       `}</style>
     </div>
