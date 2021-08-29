@@ -17,6 +17,11 @@ const Home: NextPage = () => {
   const [displayInfo, setDisplayInfo] = useState('');
 
   const getAccount = async (): Promise<string> => {
+    if ((window as any).ethereum === undefined) {
+      setDisplayInfo('Please install MetaMask to view your account details');
+      return '';
+    }
+
     try {
       const accounts = await (window as any).ethereum.request({
         method: 'eth_requestAccounts',
@@ -31,6 +36,11 @@ const Home: NextPage = () => {
   };
 
   const getWalletBalance = async (): Promise<string> => {
+    if ((window as any).ethereum === undefined) {
+      setDisplayInfo('Please install MetaMask to view your account details');
+      return '';
+    }
+
     try {
       const address = await getAccount();
       const provider = initWeb3Provider();
@@ -39,19 +49,22 @@ const Home: NextPage = () => {
 
       return formattedBalance;
     } catch (error) {
-      console.error('error', error);
+      console.error('error !', error);
+      setDisplayInfo('Please install MetaMask to view your account details');
       return '';
     }
   };
 
   const showWalletAddress = async () => {
     const address = await getAccount();
-    setDisplayInfo(address);
+
+    if (address) setDisplayInfo(address);
   };
 
   const showETHBalance = async () => {
     const balance = await getWalletBalance();
-    setDisplayInfo(balance);
+
+    if (balance) setDisplayInfo(balance);
   };
 
   return (
@@ -75,24 +88,26 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <div className={styles.dashboard}>
           {typeof window !== 'undefined' &&
-            (window as any).ethereum !== 'undefined' && (
-              <>
-                <div className={styles.result}>
-                  <span className={styles.display}>
-                    <p>{displayInfo}</p>
-                  </span>
+          (window as any).ethereum !== 'undefined' ? (
+            <>
+              <div className={styles.result}>
+                <span className={styles.display}>
+                  <p>{displayInfo}</p>
+                </span>
+              </div>
+              <div className={styles.controls}>
+                <div className={styles.buttonContainer}>
+                  <button onClick={showWalletAddress}>wallet address</button>
+                  <button onClick={showETHBalance}>ETH balance</button>
                 </div>
-                <div className={styles.controls}>
-                  <div className={styles.buttonContainer}>
-                    <button onClick={showWalletAddress}>wallet address</button>
-                    <button onClick={showETHBalance}>ETH balance</button>
-                  </div>
-                  {ERC20TokenList.map(token => (
-                    <TokenRow key={token} token={token} />
-                  ))}
-                </div>
-              </>
-            )}
+                {ERC20TokenList.map(token => (
+                  <TokenRow key={token} token={token} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <h1>This app requires MetaMask</h1>
+          )}
         </div>
       </main>
     </div>
