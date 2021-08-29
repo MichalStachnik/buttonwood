@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import { providers, utils } from 'ethers';
 import Head from 'next/head';
-import Image from 'next/image';
 
 import TokenRow from '../components/TokenRow/TokenRow';
 import styles from '../styles/index.module.css';
@@ -74,7 +73,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <Image src="/farm.svg" width={50} height={50} alt="test" />
         <div className={styles.dashboard}>
           {typeof window !== 'undefined' &&
             (window as any).ethereum !== 'undefined' && (
