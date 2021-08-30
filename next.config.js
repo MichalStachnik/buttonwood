@@ -1,14 +1,14 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  exportTrailingSlash: true,
+  trailingSlash: true,
   exportPathMap: function () {
     return {
       '/': { page: '/' },
     };
   },
-  images: {
-    loader: 'imgix',
-    path: '',
-  },
+  // images: {
+  //   loader: 'imgix',
+  //   path: 'https://noop/',
+  // },
 };
