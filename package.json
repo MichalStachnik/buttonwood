@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
-    "export": "next-export"
+    "export": "next export"
   },
   "dependencies": {
     "erc20-token-list": "0.0.3",
