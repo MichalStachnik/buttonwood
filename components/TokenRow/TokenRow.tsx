@@ -52,8 +52,14 @@ const TokenRow = ({ token }: Props) => {
   return (
     <div className="token-row">
       <div className="image">
-        <Image
+        {/* <Image
           loader={tokenLoader}
+          src={`/${token.toLowerCase()}-logo.svg`}
+          alt={token}
+          width={32}
+          height={32}
+        /> */}
+        <img
           src={`/${token.toLowerCase()}-logo.svg`}
           alt={token}
           width={32}
@@ -66,10 +72,16 @@ const TokenRow = ({ token }: Props) => {
           <Spinner />
         ) : (
           <div>
-            <p>{tokenBalance}</p>
+            <p>{tokenBalance} ETH</p>
             <span onClick={handleRefreshClick}>
-              <Image
+              {/* <Image
                 loader={refreshLoader}
+                src="/refresh.png"
+                alt="refresh balance"
+                width={16}
+                height={16}
+              /> */}
+              <img
                 src="/refresh.png"
                 alt="refresh balance"
                 width={16}
