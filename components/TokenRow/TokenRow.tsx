@@ -45,10 +45,15 @@ const TokenRow = ({ token }: Props) => {
     getERC20WalletBalance(tokenInfo.address);
   };
 
+  const tokenLoader = () => `/${token.toLowerCase()}-logo.svg`;
+
+  const refreshLoader = () => '/refresh.png';
+
   return (
     <div className="token-row">
       <div className="image">
         <Image
+          loader={tokenLoader}
           src={`/${token.toLowerCase()}-logo.svg`}
           alt={token}
           width={32}
@@ -64,6 +69,7 @@ const TokenRow = ({ token }: Props) => {
             <p>{tokenBalance}</p>
             <span onClick={handleRefreshClick}>
               <Image
+                loader={refreshLoader}
                 src="/refresh.png"
                 alt="refresh balance"
                 width={16}

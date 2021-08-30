@@ -7,8 +7,4 @@ module.exports = {
       '/': { page: '/' },
     };
   },
-  // images: {
-  //   loader: 'imgix',
-  //   path: 'https://noop/',
-  // },
 };

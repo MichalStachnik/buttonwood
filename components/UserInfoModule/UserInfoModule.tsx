@@ -83,7 +83,7 @@ const UserInfoModule = () => {
           display: flex;
           justify-content: space-around;
           margin-bottom: 1.5rem;
-          width: 90%;
+          width: 80%;
         }
 
         .button-container button {
